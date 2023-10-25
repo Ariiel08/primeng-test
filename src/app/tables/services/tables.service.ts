@@ -22,7 +22,9 @@ export class TablesService {
     return this.http.get<ProductV2[]>('https://fakestoreapi.com/products?sort=desc');
   }
 
-  saveProduct(product: any) {
-    return this.http.post('https://fakestoreapi.com/products', product);
+  saveProduct(product: any, modalType: string) {
+    if (modalType === 'add') return this.http.post('https://fakestoreapi.com/products', product);
+
+    return this.http.put('https://fakestoreapi.com/products/2', product);
   }
 }

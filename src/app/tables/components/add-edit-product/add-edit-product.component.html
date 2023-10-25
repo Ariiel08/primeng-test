@@ -1,6 +1,6 @@
 <p-dialog
-  header="Create product"
-  [(visible)]="displayAddModal"
+  header="{{selectedProduct ? 'Edit product' : 'Create product'}}"
+  [(visible)]="displayAddEditModal"
   [modal]="true"
   [style]="{ width: '50vw' }"
   [draggable]="false"
@@ -67,8 +67,8 @@
 
   <ng-template pTemplate="footer">
     <p-button
-      (click)="addProduct()"
-      label="Create"
+      (click)="addEditProduct()"
+      label="{{selectedProduct ? 'Edit' : 'Create'}}"
       [disabled]="productForm.invalid"
     ></p-button>
   </ng-template>

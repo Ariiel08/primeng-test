@@ -13,7 +13,7 @@ export interface Product {
 
 export interface ProductV2 {
   id: number;
-  title: number;
+  title: string;
   price: number;
   description: string;
   category: string;

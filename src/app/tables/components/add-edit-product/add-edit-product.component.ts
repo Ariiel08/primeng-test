@@ -1,24 +1,30 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { catchError, of } from 'rxjs';
 import { TablesService } from '../../services/tables.service';
+import { ProductV2 } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'add-edit-product-dialog',
   templateUrl: './add-edit-product.component.html',
   styleUrls: ['./add-edit-product.component.css']
 })
-export class AddEditProductComponent implements OnInit {
+export class AddEditProductComponent implements OnInit, OnChanges {
 
   @Input()
-  displayAddModal: boolean = true;
+  displayAddEditModal: boolean = true;
+
+  @Input()
+  selectedProduct: ProductV2 | null = null;
 
   @Output()
   closeDialog: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Output()
   insertProduct: EventEmitter<any> = new EventEmitter<any>();
+
+  modalType: string = '';
 
   productForm = this.fb.group({
     title: ["", Validators.required],
@@ -29,9 +35,20 @@ export class AddEditProductComponent implements OnInit {
   });
 
   constructor( private fb: FormBuilder, private tablesService: TablesService, private messageService: MessageService ) { }
-
+  
   ngOnInit() {
-    console.log(this.displayAddModal);
+    console.log(this.displayAddEditModal);
+  }
+  
+  ngOnChanges(): void {
+    if (this.selectedProduct) {
+      this.modalType = 'edit';
+      this.productForm.patchValue(this.selectedProduct);
+      return;
+    }
+
+    this.modalType = 'add';
+    this.productForm.reset();
   }
 
   closeModal() {
@@ -39,8 +56,8 @@ export class AddEditProductComponent implements OnInit {
     this.closeDialog.emit(false);
   }
 
-  addProduct() {
-    this.tablesService.saveProduct(this.productForm.value)
+  addEditProduct() {
+    this.tablesService.saveProduct(this.productForm.value, this.modalType)
       .pipe(
         catchError(error => {
           console.error("Ha ocurrido un error:", error);

@@ -1,38 +1,49 @@
 <div class="p-3">
-    <h2>CRUD Example - Products List</h2>
-  
-    <div class="flex justify-content-between mb-3">
-      <p-button label="Add Product" (click)="showAddModal()"></p-button>
-    </div>
-  
-    <p-table
-      [value]="products"
-      [tableStyle]="{ 'min-width': '50rem' }"
-      [paginator]="true"
-      [rows]="5"
-      [rowsPerPageOptions]="[5, 10, 15]"
-    >
-      <ng-template pTemplate="header">
-        <tr>
-          <th>Title</th>
-          <th>Price</th>
-          <th>Category</th>
-          <th>Image</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-prod>
-        <tr>
-          <td>{{ prod.title }}</td>
-          <td>{{ prod.price }}</td>
-          <td>{{ prod.category }}</td>
-          <td><img src="{{ prod.image }}" height="35px" /></td>
-        </tr>
-      </ng-template>
-    </p-table>
-  
-    <add-edit-product-dialog [displayAddModal]="displayAddModal" (closeDialog)="displayAddModal = $event" 
-    (insertProduct)="insertProductIntoTable($event)"/> 
-  
-    <p-toast position="bottom-right" ></p-toast>
+  <h2>CRUD Example - Products List</h2>
+
+  <div class="flex justify-content-between mb-3">
+    <p-button label="Add Product" (click)="showAddModal()"></p-button>
   </div>
-  
+
+  <p-table
+    [value]="products"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [paginator]="true"
+    [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 15]"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Image</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-prod>
+      <tr>
+        <td>{{ prod.title }}</td>
+        <td>{{ prod.price }}</td>
+        <td>{{ prod.category }}</td>
+        <td><img src="{{ prod.image }}" height="35px" /></td>
+        <td>
+          <button
+            pButton
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success mr-2"
+            (click)="showEditModal(prod)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <add-edit-product-dialog
+    [displayAddEditModal]="displayAddEditModal"
+    [selectedProduct]="selectedProduct"
+    (closeDialog)="displayAddEditModal = $event"
+    (insertProduct)="insertProductIntoTable($event)"
+  />
+
+  <p-toast position="bottom-right"></p-toast>
+</div>

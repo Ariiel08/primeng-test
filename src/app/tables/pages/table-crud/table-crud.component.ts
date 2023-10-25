@@ -10,7 +10,8 @@ import { TablesService } from '../../services/tables.service';
 export class TableCrudComponent {
   
   products: ProductV2[] = [];
-  displayAddModal = false;
+  displayAddEditModal: boolean = false;
+  selectedProduct: ProductV2 | null = null;
 
   constructor( private tablesService: TablesService ) { }
 
@@ -28,10 +29,16 @@ export class TableCrudComponent {
   }
 
   showAddModal() {
-    this.displayAddModal = true;
+    this.displayAddEditModal = true;
+    this.selectedProduct = null;
   }
 
   insertProductIntoTable(product: any) {
     this.products.unshift(product);
+  }
+
+  showEditModal(product: ProductV2) {
+    this.displayAddEditModal = true;
+    this.selectedProduct = product;
   }
 }
