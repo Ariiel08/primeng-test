@@ -11,11 +11,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TableModule as TableNG } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -36,10 +37,12 @@ import { MessageService } from 'primeng/api';
     InputNumberModule,
     InputTextareaModule,
     DialogModule,
+    ConfirmDialogModule,
     ToastModule
   ],
   providers: [
-    MessageService
+    MessageService,
+    ConfirmationService
   ]
 })
 export class TablesModule { }

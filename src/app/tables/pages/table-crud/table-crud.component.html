@@ -18,6 +18,7 @@
         <th>Price</th>
         <th>Category</th>
         <th>Image</th>
+        <th>Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-prod>
@@ -33,6 +34,13 @@
             class="p-button-rounded p-button-success mr-2"
             (click)="showEditModal(prod)"
           ></button>
+
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger"
+            (click)="deleteProduct(prod)"
+          ></button>
         </td>
       </tr>
     </ng-template>
@@ -45,5 +53,6 @@
     (insertProduct)="insertProductIntoTable($event)"
   />
 
+  <p-confirmDialog header="Delete"></p-confirmDialog>
   <p-toast position="bottom-right"></p-toast>
 </div>
