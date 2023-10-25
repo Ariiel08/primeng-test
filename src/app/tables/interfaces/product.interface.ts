@@ -10,3 +10,18 @@ export interface Product {
   title: string,
   price: number
 }
+
+export interface ProductV2 {
+  id: number;
+  title: number;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: RatingProps;
+}
+
+interface RatingProps {
+  rate: number;
+  count: number;
+}

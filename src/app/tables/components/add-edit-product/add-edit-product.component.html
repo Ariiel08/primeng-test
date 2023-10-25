@@ -1,0 +1,76 @@
+<p-dialog
+  header="Create product"
+  [(visible)]="displayAddModal"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closeModal()"
+>
+  <form [formGroup]="productForm" class="product-form">
+    <div class="field">
+      <label class="block" for="title">Title</label>
+      <input id="title" type="text" pInputText formControlName="title" />
+      <small
+        class="p-error block"
+        *ngIf="
+          productForm.controls['title'].invalid &&
+          productForm.controls['title'].dirty
+        "
+      >
+        Field is required
+      </small>
+    </div>
+    <div class="field">
+      <label class="block" for="price">Price</label>
+      <p-inputNumber
+        class="block"
+        id="price"
+        formControlName="price"
+      ></p-inputNumber>
+      <small
+        class="p-error block"
+        *ngIf="
+          productForm.controls['price'].invalid &&
+          productForm.controls['price'].dirty
+        "
+      >
+        Field is required
+      </small>
+    </div>
+    <div class="field">
+      <label class="block" for="description">Description</label>
+      <textarea
+        id="description"
+        pInputTextarea
+        formControlName="description"
+      ></textarea>
+    </div>
+    <div class="field">
+      <label class="block" for="image">Image</label>
+      <input id="image" type="text" pInputText formControlName="image" />
+      <small
+        class="p-error block"
+        *ngIf="
+          productForm.controls['image'].invalid &&
+          productForm.controls['image'].dirty
+        "
+      >
+        Field is required
+      </small>
+    </div>
+    <div class="field">
+      <label class="block" for="category">Category</label>
+      <input id="category" type="text" pInputText formControlName="category" />
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      (click)="addProduct()"
+      label="Create"
+      [disabled]="productForm.invalid"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+

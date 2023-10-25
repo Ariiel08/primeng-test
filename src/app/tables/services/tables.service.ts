@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductResponse } from '../interfaces/product.interface';
+import { ProductResponse, ProductV2 } from '../interfaces/product.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +16,13 @@ export class TablesService {
 
   getProductsList( skip: number ): Observable<ProductResponse> {
     return this.http.get<ProductResponse>(`https://dummyjson.com/products?limit=10&skip=${skip}`);
+  }
+
+  getProductsFromFakeStore(): Observable<ProductV2[]> {
+    return this.http.get<ProductV2[]>('https://fakestoreapi.com/products?sort=desc');
+  }
+
+  saveProduct(product: any) {
+    return this.http.post('https://fakestoreapi.com/products', product);
   }
 }
