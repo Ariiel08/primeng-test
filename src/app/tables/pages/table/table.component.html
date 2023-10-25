@@ -1,1 +1,24 @@
-<p>table works!</p>
+<div>
+    <h2>Table Example - Users List</h2>
+    
+    <p-table [value]="users" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="5">
+      <ng-template pTemplate="header">
+          <tr>
+              <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+              <th pSortableColumn="age">Age <p-sortIcon field="age"></p-sortIcon></th>
+              <th>Phone Number</th>
+              <th>Email ID</th>
+              <th>Post Code</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+          <tr>
+              <td>{{ user.name }}</td>
+              <td>{{ user.age }}</td>
+              <td>{{ user.phone_number }}</td>
+              <td>{{ user.email_id }}</td>
+              <td>{{ user.pincode }}</td>
+          </tr>
+      </ng-template>
+    </p-table>
+  </div>
