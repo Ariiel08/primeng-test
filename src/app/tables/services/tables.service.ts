@@ -31,4 +31,8 @@ export class TablesService {
   deleteProduct(productId: number) {
     return this.http.delete(`https://fakestoreapi.com/products/${productId}`)
   }
+
+  getCategories(): Observable<string[]> {
+    return this.http.get<string[]>('https://fakestoreapi.com/products/categories');
+  }
 }

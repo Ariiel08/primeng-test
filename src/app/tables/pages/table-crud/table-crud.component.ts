@@ -11,6 +11,7 @@ export class TableCrudComponent implements OnInit, OnDestroy {
   products: ProductV2[] = [];
   displayAddEditModal: boolean = false;
   selectedProduct: ProductV2 | null = null;
+  selectedCategory: string = '';
   subscriptions: Subscription[] = [];
   productSubscription: Subscription = new Subscription();
 

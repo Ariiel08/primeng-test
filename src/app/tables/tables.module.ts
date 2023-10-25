@@ -17,6 +17,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DropdownModule } from 'primeng/dropdown';
+import { FilterComponent } from './components/filter/filter.component';
 
 
 @NgModule({
@@ -24,21 +26,23 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     TableComponent,
     TableLazyComponent,
     TableCrudComponent,
-    AddEditProductComponent
+    AddEditProductComponent,
+    FilterComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     TablesRoutingModule,
-    //* PrimeNG Modules
+    //** PrimeNG Modules
     TableNG,
     ButtonModule,
     InputTextModule,
     InputNumberModule,
     InputTextareaModule,
+    DropdownModule,
     DialogModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
   ],
   providers: [
     MessageService,
