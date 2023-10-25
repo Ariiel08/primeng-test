@@ -57,7 +57,7 @@ export class AddEditProductComponent implements OnInit, OnChanges {
   }
 
   addEditProduct() {
-    this.tablesService.saveProduct(this.productForm.value, this.modalType)
+    this.tablesService.saveProduct(this.productForm.value, this.selectedProduct)
       .pipe(
         catchError(error => {
           console.error("Ha ocurrido un error:", error);
@@ -69,7 +69,8 @@ export class AddEditProductComponent implements OnInit, OnChanges {
         console.log(newProduct);
         this.insertProduct.emit(newProduct);
         this.closeModal();
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Product added' });
+        const msg = this.modalType === 'add' ? 'Product added' : 'Product updated';
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: msg });
       });
   }
 }

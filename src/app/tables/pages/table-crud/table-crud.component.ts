@@ -19,7 +19,7 @@ export class TableCrudComponent {
     this.getProducts();
   }
 
-  getProducts() {
+  getProducts(): void {
     this.tablesService.getProductsFromFakeStore()
       .subscribe(
         products => {
@@ -28,16 +28,23 @@ export class TableCrudComponent {
       )
   }
 
-  showAddModal() {
+  showAddModal(): void {
     this.displayAddEditModal = true;
     this.selectedProduct = null;
   }
 
-  insertProductIntoTable(product: any) {
-    this.products.unshift(product);
+  insertProductIntoTable(newProduct: any): void {
+    if (newProduct.id === this.selectedProduct?.id) {
+      const productIndex = this.products.findIndex(data => data.id === newProduct.id);
+      this.products[productIndex] = newProduct;
+
+      return;
+    }
+
+    this.products.unshift(newProduct);
   }
 
-  showEditModal(product: ProductV2) {
+  showEditModal(product: ProductV2): void {
     this.displayAddEditModal = true;
     this.selectedProduct = product;
   }
