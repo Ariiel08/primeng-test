@@ -20,13 +20,13 @@ export class TableCrudComponent implements OnInit, OnDestroy {
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {}
-  
+
   ngOnInit(): void {
     this.getProducts();
   }
-  
-  getProducts(): void {
-    this.productSubscription = this.tablesService.getProductsFromFakeStore().subscribe((products) => {
+
+  getProducts( category?: string ): void {
+    this.productSubscription = this.tablesService.getProductsFromFakeStore(category || '').subscribe((products) => {
       this.products = products;
     });
     this.subscriptions.push(this.productSubscription);
@@ -75,6 +75,10 @@ export class TableCrudComponent implements OnInit, OnDestroy {
         );
       },
     });
+  }
+
+  getProductsByCategory( category: string ) {
+    this.getProducts(category);
   }
 
   ngOnDestroy(): void {

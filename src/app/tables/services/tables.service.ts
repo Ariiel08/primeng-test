@@ -18,8 +18,9 @@ export class TablesService {
     return this.http.get<ProductResponse>(`https://dummyjson.com/products?limit=10&skip=${skip}`);
   }
 
-  getProductsFromFakeStore(): Observable<ProductV2[]> {
-    return this.http.get<ProductV2[]>('https://fakestoreapi.com/products?sort=desc');
+  getProductsFromFakeStore(category: string): Observable<ProductV2[]> {
+    const categoryUrl = category ? `/category/${category}` : '';
+    return this.http.get<ProductV2[]>(`https://fakestoreapi.com/products${categoryUrl}?sort=desc`);
   }
 
   saveProduct(product: any, selectedProduct: ProductV2 | null) {
